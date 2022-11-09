@@ -1,27 +1,17 @@
-package resourses.java.by.grsu.makarevich.test.db.model;
+package by.grsu.makarevich.test.db.model;
 
 public class User 
 {
-    protected static Integer _id = 0;
+    private Integer id;
 
-    protected String name;
-    protected String secondName;
-    protected String patronimyc;
-    protected Role role;
+    private String name;
+    private String secondName;
+    private String patronimyc;
+    private Role role;
 
-    public User(String name, String secondName, String patronimyc, Role role)
+    public Integer getId() 
     {
-        ++_id;
-
-        this.name = name;
-        this.secondName = secondName;
-        this.patronimyc = patronimyc;
-        this.role = role;
-    }
-
-    public static Integer getId() 
-    {
-        return _id;
+        return id;
     }
 
     public String getName() 
@@ -44,6 +34,11 @@ public class User
         return role;
     }
 
+    public void setId(Integer id) 
+    {
+        this.id = id;
+    }
+
     public void setName(String name) 
     {
         this.name = name;
@@ -63,11 +58,13 @@ public class User
     {
         this.role = role;
     }
-
+    
     @Override
-    public String toString()
+    public String toString() 
     {
-        return "User [name=" + name + ", secondName=" + secondName + ", patronimyc=" + patronimyc + "]";
+        return "User [id=" + id + ", name=" + name + ", secondName=" + secondName + ", patronimyc=" + patronimyc
+                + ", role=" + role + "]";
     }
+
     
 }

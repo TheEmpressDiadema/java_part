@@ -1,5 +1,7 @@
 package by.grsu.makarevich.test.db.model;
 
+import java.sql.Timestamp;
+
 public class User 
 {
     private Integer id;
@@ -8,6 +10,8 @@ public class User
     private String secondName;
     private String patronimyc;
     private Role role;
+    private Timestamp updated;
+    private Timestamp created;
 
     public Integer getId() 
     {
@@ -34,6 +38,16 @@ public class User
         return role;
     }
 
+    public Timestamp getUpdated() 
+    {
+        return updated;
+    }
+
+    public Timestamp getCreated() 
+    {
+        return created;
+    }
+
     public void setId(Integer id) 
     {
         this.id = id;
@@ -58,13 +72,21 @@ public class User
     {
         this.role = role;
     }
-    
+
+    public void setUpdated(Timestamp updated) 
+    {
+        this.updated = updated;
+    }
+
+    public void setCreated(Timestamp created) 
+    {
+        this.created = created;
+    }
+
     @Override
     public String toString() 
     {
         return "User [id=" + id + ", name=" + name + ", secondName=" + secondName + ", patronimyc=" + patronimyc
                 + ", role=" + role + "]";
     }
-
-    
 }

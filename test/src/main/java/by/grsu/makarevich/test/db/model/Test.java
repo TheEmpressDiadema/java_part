@@ -1,5 +1,7 @@
 package by.grsu.makarevich.test.db.model;
 
+import java.sql.Timestamp;
+
 public class Test 
 {
     private Integer id;
@@ -7,6 +9,8 @@ public class Test
     private String name;
     private Boolean status;
     private String updateDate;
+    private Timestamp created;
+    private Timestamp updated;
 
     public Integer getId() 
     {
@@ -31,6 +35,26 @@ public class Test
     public String getUpdateDate() 
     {
         return updateDate;
+    }
+
+    public Timestamp getCreated() 
+    {
+        return created;
+    }
+
+    public Timestamp getUpdated() 
+    {
+        return updated;
+    }
+
+    public void setCreated(Timestamp created) 
+    {
+        this.created = created;
+    }
+
+    public void setUpdated(Timestamp updated) 
+    {
+        this.updated = updated;
     }
 
     public void setId(Integer id) 

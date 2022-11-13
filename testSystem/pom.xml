@@ -1,0 +1,23 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>by.grsu.makarevich</groupId>
+  <artifactId>test</artifactId>
+  <version>1.0</version>
+  <name>test Maven Webapp</name>
+  <properties>
+    <maven.compiler.target>11</maven.compiler.target>
+		<maven.compiler.source>11</maven.compiler.source>
+		<jetty.version>10.0.12</jetty.version>
+		<slf4j.version>2.0.3</slf4j.version>
+		<servlet.version>4.0.4</servlet.version>
+  </properties>
+  <dependencies>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+		<artifactId>junit-jupiter-engine</artifactId>
+		<version>5.4.0</version>
+		<scope>test</scope>
+    </dependency>
+  </dependencies>
+</project>

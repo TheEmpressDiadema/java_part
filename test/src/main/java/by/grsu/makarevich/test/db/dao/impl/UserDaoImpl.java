@@ -15,18 +15,22 @@ public class UserDaoImpl extends AbstractDao implements IDao<Integer, User>
 {
     private static final UserDaoImpl INSTANCE = new UserDaoImpl();
 
-    public UserDaoImpl()
+    private UserDaoImpl()
     {
         super();
     }
+	
     @Override
     public void insert(User entity) 
     {
         try (Connection c = createConnection()) {
-			PreparedStatement pstmt = c.prepareStatement("insert into user(name, created, updated) values(?,?,?)");
+			PreparedStatement pstmt = c.prepareStatement("insert into user(name, second_name, patronimyc, role_id, created, updated) values(?,?,?,?,?,?)");
 			pstmt.setString(1, entity.getName());
-			pstmt.setTimestamp(2, entity.getCreated());
-			pstmt.setTimestamp(3, entity.getUpdated());
+			pstmt.setString(2, entity.getSecondName());
+			pstmt.setString(3,entity.getPatronimyc());
+			pstmt.setInt(4, entity.getRoleId());
+			pstmt.setTimestamp(5, entity.getCreated());
+			pstmt.setTimestamp(6, entity.getUpdated());
 			pstmt.executeUpdate();
 			entity.setId(getGeneratedId(c, "user"));
 		} catch (SQLException e) {
@@ -39,10 +43,13 @@ public class UserDaoImpl extends AbstractDao implements IDao<Integer, User>
     {
         try (Connection c = createConnection()) 
         {
-			PreparedStatement pstmt = c.prepareStatement("update user set name=?, updated=? where id=?");
+			PreparedStatement pstmt = c.prepareStatement("update user set name=?, second_name=?, patronimyc=?, role_id=?, created=?, updated=? where id=?");
 			pstmt.setString(1, entity.getName());
-			pstmt.setTimestamp(2, entity.getUpdated());
-			pstmt.setInt(3, entity.getId());
+			pstmt.setString(2,entity.getSecondName());
+			pstmt.setString(3, entity.getPatronimyc());
+			pstmt.setInt(4, entity.getRoleId());
+			pstmt.setTimestamp(5, entity.getCreated());
+			pstmt.setTimestamp(6, entity.getUpdated());
 			pstmt.executeUpdate();
 		} 
         catch (SQLException e) 
@@ -116,6 +123,9 @@ public class UserDaoImpl extends AbstractDao implements IDao<Integer, User>
 		User entity = new User();
 		entity.setId(res.getInt("id"));
 		entity.setName(res.getString("name"));
+		entity.setSecondName(res.getString("second_name"));
+		entity.setPatronimyc(res.getString("patronimyc"));
+		entity.setRoleId(res.getInt("role_id"));
 		entity.setCreated(res.getTimestamp("created"));
 		entity.setUpdated(res.getTimestamp("updated"));
 		return entity;

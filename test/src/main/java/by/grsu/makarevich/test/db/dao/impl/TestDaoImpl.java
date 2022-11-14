@@ -13,14 +13,22 @@ import by.grsu.makarevich.test.db.dao.IDao;
 
 public class TestDaoImpl extends AbstractDao implements IDao<Integer, Test>
 {
+	private static final TestDaoImpl INSTANCE = new TestDaoImpl();
+
+	private TestDaoImpl()
+	{
+		super();
+	}
 
     @Override
     public void insert(Test entity) 
     {
         try (Connection c = createConnection()) 
         {
-			PreparedStatement pstmt = c.prepareStatement("insert into test(name, created, updated) values(?,?,?)");
+			PreparedStatement pstmt = c.prepareStatement("insert into test(name, subject_id, status, created, updated) values(?,?,?,?,?)");
 			pstmt.setString(1, entity.getName());
+			pstmt.setInt(2,entity.getSubjectId());
+			pstmt.setBoolean(3, entity.getStatus());
 			pstmt.setTimestamp(2, entity.getCreated());
 			pstmt.setTimestamp(3, entity.getUpdated());
 			pstmt.executeUpdate();
@@ -36,15 +44,17 @@ public class TestDaoImpl extends AbstractDao implements IDao<Integer, Test>
     {
         try (Connection c = createConnection()) 
         {
-			PreparedStatement pstmt = c.prepareStatement("update test set name=?, updated=? where id=?");
+			PreparedStatement pstmt = c.prepareStatement("update test set name=?, subject_id=?, status=?, created=?, updated=? where id=?");
 			pstmt.setString(1, entity.getName());
-			pstmt.setTimestamp(2, entity.getUpdated());
-			pstmt.setInt(3, entity.getId());
+			pstmt.setInt(2, entity.getSubjectId());
+			pstmt.setBoolean(3, entity.getStatus());
+			pstmt.setTimestamp(4, entity.getCreated());
+			pstmt.setTimestamp(5, entity.getUpdated());
 			pstmt.executeUpdate();
 		} 
         catch (SQLException e) 
         {
-			throw new RuntimeException("can't update test entity", e);
+			throw new RuntimeException("can't update Test entity", e);
 		}
     }
 
@@ -113,6 +123,8 @@ public class TestDaoImpl extends AbstractDao implements IDao<Integer, Test>
 		Test entity = new Test();
 		entity.setId(res.getInt("id"));
 		entity.setName(res.getString("name"));
+		entity.setSubjectId(res.getInt("subject_id"));
+		entity.setStatus(res.getBoolean("status"));
 		entity.setCreated(res.getTimestamp("created"));
 		entity.setUpdated(res.getTimestamp("updated"));
 		return entity;

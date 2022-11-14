@@ -1,26 +1,30 @@
 package by.grsu.makarevich.test.db.model;
 
+import java.sql.Timestamp;;
+
 public class Result 
 {
     private Integer id;
-    private User user;
-    private Test test;
+    private Integer userId;
+    private Integer testId;
     private String date;
     private Float mark;
+    private Timestamp created;
+    private Timestamp updated;
 
     public Integer getId() 
     {
         return id;
     }
 
-    public User getUser() 
+    public Integer getUserId() 
     {
-        return user;
+        return userId;
     }
 
-    public Test getTest() 
+    public Integer getTestId() 
     {
-        return test;
+        return testId;
     }
 
     public String getDate() 
@@ -33,19 +37,39 @@ public class Result
         return mark;
     }
 
+    public Timestamp getCreated() 
+    {
+        return created;
+    }
+
+    public Timestamp getUpdated() 
+    {
+        return updated;
+    }
+
+    public void setCreated(Timestamp created) 
+    {
+        this.created = created;
+    }
+
+    public void setUpdated(Timestamp updated) 
+    {
+        this.updated = updated;
+    }
+
     public void setId(Integer id) 
     {
         this.id = id;
     }
 
-    public void setUser(User user) 
+    public void setUserId(Integer userId) 
     {
-        this.user = user;
+        this.userId = userId;
     }
 
-    public void setTest(Test test) 
+    public void setTestId(Integer testId) 
     {
-        this.test = test;
+        this.testId = testId;
     }
 
     public void setDate(String date) 
@@ -61,8 +85,8 @@ public class Result
     @Override
     public String toString() 
     {
-        return "Result [id=" + id + ", user=" + user + ", test=" + test + ", date=" + date + ", mark=" + mark + "]";
+        return "Result [id=" + id + ", user=" + userId + ", test=" + testId + ", date=" + date + ", mark=" + mark
+                + ", created=" + created + ", updated=" + updated + "]";
     }
-
     
 }

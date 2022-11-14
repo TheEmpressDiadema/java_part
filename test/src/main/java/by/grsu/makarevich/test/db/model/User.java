@@ -5,11 +5,10 @@ import java.sql.Timestamp;
 public class User 
 {
     private Integer id;
-
     private String name;
     private String secondName;
     private String patronimyc;
-    private Role role;
+    private Integer roleId;
     private Timestamp updated;
     private Timestamp created;
 
@@ -33,9 +32,9 @@ public class User
         return patronimyc;
     }
 
-    public Role getRole() 
+    public Integer getRoleId() 
     {
-        return role;
+        return roleId;
     }
 
     public Timestamp getUpdated() 
@@ -68,9 +67,9 @@ public class User
         this.patronimyc = patronimyc;
     }
 
-    public void setRole(Role role) 
+    public void setRoleId(Integer roleId) 
     {
-        this.role = role;
+        this.roleId = roleId;
     }
 
     public void setUpdated(Timestamp updated) 
@@ -87,6 +86,7 @@ public class User
     public String toString() 
     {
         return "User [id=" + id + ", name=" + name + ", secondName=" + secondName + ", patronimyc=" + patronimyc
-                + ", role=" + role + "]";
+                + ", role=" + roleId + ", updated=" + updated + ", created=" + created + "]";
     }
+    
 }

@@ -5,21 +5,15 @@ import java.sql.Timestamp;
 public class Test 
 {
     private Integer id;
-    private String creationDate;
     private String name;
     private Boolean status;
-    private String updateDate;
+    private Integer subjectId;
     private Timestamp created;
     private Timestamp updated;
 
     public Integer getId() 
     {
         return id;
-    }
-    
-    public String getCreationDate() 
-    {
-        return creationDate;
     }
 
     public String getName() 
@@ -32,11 +26,6 @@ public class Test
         return status;
     }
 
-    public String getUpdateDate() 
-    {
-        return updateDate;
-    }
-
     public Timestamp getCreated() 
     {
         return created;
@@ -45,6 +34,16 @@ public class Test
     public Timestamp getUpdated() 
     {
         return updated;
+    }
+
+    public Integer getSubjectId()
+    {
+        return subjectId;
+    }
+
+    public void setSubjectId(Integer subjectId)
+    {
+        this.subjectId = subjectId;
     }
 
     public void setCreated(Timestamp created) 
@@ -62,11 +61,6 @@ public class Test
         this.id = id;
     }
 
-    public void setCreationDate(String creationDate) 
-    {
-        this.creationDate = creationDate;
-    }
-
     public void setName(String name) 
     {
         this.name = name;
@@ -77,15 +71,11 @@ public class Test
         this.status = status;
     }
 
-    public void setUpdateDate(String updateDate) 
-    {
-        this.updateDate = updateDate;
-    }
-
     @Override
-    public String toString() {
-        return "Test [id=" + id + ", creationDate=" + creationDate + ", name=" + name + ", status=" + status
-                + ", updateDate=" + updateDate + "]";
+    public String toString() 
+    {
+        return "Test [id=" + id + ", created=" + created.toString() + ", name=" + name + ", status=" + status 
+        + "subjectId" + subjectId + ", updated =" + updated.toString() + "]";
     }
 
 

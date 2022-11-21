@@ -8,12 +8,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import by.grsu.makarevich.test.db.dao.AbstractDao;
-import by.grsu.makarevich.test.db.model.Test;
+import by.grsu.makarevich.test.db.model.Test1;
 import by.grsu.makarevich.test.db.dao.IDao;
 
-public class TestDaoImpl extends AbstractDao implements IDao<Integer, Test>
+public class TestDaoImpl extends AbstractDao implements IDao<Integer, Test1>
 {
-	private static final TestDaoImpl INSTANCE = new TestDaoImpl();
+	public static final TestDaoImpl INSTANCE = new TestDaoImpl();
 
 	private TestDaoImpl()
 	{
@@ -21,7 +21,7 @@ public class TestDaoImpl extends AbstractDao implements IDao<Integer, Test>
 	}
 
     @Override
-    public void insert(Test entity) 
+    public void insert(Test1 entity) 
     {
         try (Connection c = createConnection()) 
         {
@@ -40,7 +40,7 @@ public class TestDaoImpl extends AbstractDao implements IDao<Integer, Test>
     }
 
     @Override
-    public void update(Test entity) 
+    public void update(Test1 entity) 
     {
         try (Connection c = createConnection()) 
         {
@@ -74,9 +74,9 @@ public class TestDaoImpl extends AbstractDao implements IDao<Integer, Test>
     }
 
     @Override
-    public Test getById(Integer id) 
+    public Test1 getById(Integer id) 
     {
-        Test entity = null;
+        Test1 entity = null;
 		try (Connection c = createConnection()) 
         {
 			PreparedStatement pstmt = c.prepareStatement("select * from test where id=?");
@@ -91,36 +91,36 @@ public class TestDaoImpl extends AbstractDao implements IDao<Integer, Test>
 		} 
         catch (SQLException e) 
         {
-			throw new RuntimeException("can't get User entity by id", e);
+			throw new RuntimeException("can't get Test entity by id", e);
 		}
 
 		return entity;
     }
 
     @Override
-    public List<Test> getAll() 
+    public List<Test1> getAll() 
     {
-        List<Test> entitiesList = new ArrayList<>();
+        List<Test1> entitiesList = new ArrayList<>();
 		try (Connection c = createConnection()) 
         {
-			ResultSet rs = c.createStatement().executeQuery("select * from brand");
+			ResultSet rs = c.createStatement().executeQuery("select * from test");
 			while (rs.next()) 
             {
-				Test entity = rowToEntity(rs);
+				Test1 entity = rowToEntity(rs);
 				entitiesList.add(entity);
 			}
 		}
         catch (SQLException e) 
         {
-			throw new RuntimeException("can't select Brand entities", e);
+			throw new RuntimeException("can't select Test entities", e);
 		}
 
 		return entitiesList;
     }
 
-    private Test rowToEntity(ResultSet res) throws SQLException 
+    private Test1 rowToEntity(ResultSet res) throws SQLException 
     {
-		Test entity = new Test();
+		Test1 entity = new Test1();
 		entity.setId(res.getInt("id"));
 		entity.setName(res.getString("name"));
 		entity.setSubjectId(res.getInt("subject_id"));

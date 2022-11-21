@@ -2,7 +2,7 @@ package by.grsu.makarevich.test.db.model;
 
 import java.sql.Timestamp;
 
-public class Test 
+public class Test1 
 {
     private Integer id;
     private String name;

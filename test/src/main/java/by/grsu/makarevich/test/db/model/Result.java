@@ -1,14 +1,14 @@
 package by.grsu.makarevich.test.db.model;
 
-import java.sql.Timestamp;;
+import java.sql.Timestamp;
 
 public class Result 
 {
     private Integer id;
     private Integer userId;
     private Integer testId;
-    private String date;
-    private Float mark;
+    private Timestamp date;
+    private Double mark;
     private Timestamp created;
     private Timestamp updated;
 
@@ -27,12 +27,12 @@ public class Result
         return testId;
     }
 
-    public String getDate() 
+    public Timestamp getDate() 
     {
         return date;
     }
 
-    public Float getMark() 
+    public Double getMark() 
     {
         return mark;
     }
@@ -72,12 +72,12 @@ public class Result
         this.testId = testId;
     }
 
-    public void setDate(String date) 
+    public void setDate(Timestamp date) 
     {
         this.date = date;
     }
 
-    public void setMark(Float mark) 
+    public void setMark(Double mark) 
     {
         this.mark = mark;
     }

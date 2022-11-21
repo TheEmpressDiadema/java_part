@@ -13,7 +13,7 @@ import by.grsu.makarevich.test.db.dao.IDao;
 
 public class UserDaoImpl extends AbstractDao implements IDao<Integer, User>
 {
-    private static final UserDaoImpl INSTANCE = new UserDaoImpl();
+    public static final UserDaoImpl INSTANCE = new UserDaoImpl();
 
     private UserDaoImpl()
     {
@@ -54,7 +54,7 @@ public class UserDaoImpl extends AbstractDao implements IDao<Integer, User>
 		} 
         catch (SQLException e) 
         {
-			throw new RuntimeException("can't update Test entity", e);
+			throw new RuntimeException("can't update User entity", e);
 		}
     }
 

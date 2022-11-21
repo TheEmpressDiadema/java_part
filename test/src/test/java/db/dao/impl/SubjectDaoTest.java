@@ -37,7 +37,7 @@ public class SubjectDaoTest extends AbstractDaoTest
 		dao.update(entity);
 
 		Subject updatedEntity = dao.getById(entity.getId());
-		Assertions.assertEquals( temp, updatedEntity.getId());
+		Assertions.assertEquals( temp, updatedEntity.getName());
 		Assertions.assertNotEquals(updatedEntity.getUpdated(), updatedEntity.getCreated());
 	}
 

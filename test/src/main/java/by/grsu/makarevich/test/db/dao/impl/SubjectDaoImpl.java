@@ -42,10 +42,10 @@ public class SubjectDaoImpl extends AbstractDao implements IDao<Integer, Subject
     {
         try (Connection c = createConnection()) 
         {
-			PreparedStatement pstmt = c.prepareStatement("update subject set name=?, created=?, updated=? where id=?");
+			PreparedStatement pstmt = c.prepareStatement("update subject set name=?, updated=? where id=?");
 			pstmt.setString(1, entity.getName());
-			pstmt.setTimestamp(2, entity.getCreated());
-			pstmt.setTimestamp(3, entity.getUpdated());
+			pstmt.setTimestamp(2, entity.getUpdated());
+			pstmt.setInt(3, entity.getId());
 			pstmt.executeUpdate();
 		} 
         catch (SQLException e) 

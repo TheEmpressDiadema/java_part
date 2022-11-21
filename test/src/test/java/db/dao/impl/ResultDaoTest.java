@@ -7,18 +7,30 @@ import org.junit.jupiter.api.Test;
 
 import by.grsu.makarevich.test.db.dao.IDao;
 import by.grsu.makarevich.test.db.dao.impl.ResultDaoImpl;
+import by.grsu.makarevich.test.db.dao.impl.UserDaoImpl;
+import by.grsu.makarevich.test.db.dao.impl.TestDaoImpl;
+import by.grsu.makarevich.test.db.dao.impl.RoleDaoImpl;
+import by.grsu.makarevich.test.db.dao.impl.SubjectDaoImpl;
 import by.grsu.makarevich.test.db.model.Result;
+import by.grsu.makarevich.test.db.model.User;
+import by.grsu.makarevich.test.db.model.Test1;
+import by.grsu.makarevich.test.db.model.Role;
+import by.grsu.makarevich.test.db.model.Subject;
 
 public class ResultDaoTest extends AbstractDaoTest
 {
     private static final IDao<Integer, Result> dao = ResultDaoImpl.INSTANCE;
+	private static final IDao<Integer, User> userDao = UserDaoImpl.INSTANCE;
+	private static final IDao<Integer, Test1> testDao = TestDaoImpl.INSTANCE;
+	private static final IDao<Integer, Role> roleDao = RoleDaoImpl.INSTANCE;
+	private static final IDao<Integer, Subject> subjectDao = SubjectDaoImpl.INSTANCE;
 
     @Test
 	public void testInsert() 
 	{
 		Result entity = new Result();
-		entity.setUserId(1);
-        entity.setTestId(1);
+		entity.setUserId(saveUser().getId());
+        entity.setTestId(saveTest().getId());
         entity.setDate(new Timestamp(123));
         entity.setMark(5.4);
 		entity.setCreated(getCurrentTime());
@@ -31,21 +43,21 @@ public class ResultDaoTest extends AbstractDaoTest
 	public void testUpdate() 
 	{
 		Result entity = new Result();
-		entity.setUserId(1);
-		entity.setTestId(1);
+		entity.setUserId(saveUser().getId());
+        entity.setTestId(saveTest().getId());
 		entity.setDate(new Timestamp(123));
         entity.setMark(5.4);
 		entity.setCreated(getCurrentTime());
 		entity.setUpdated(getCurrentTime());
 		dao.insert(entity);
 
-		Integer temp = 4;
-		entity.setUserId(temp);
+		Double temp = 4.4;
+		entity.setMark(temp);
 		entity.setUpdated(getCurrentTime());
 		dao.update(entity);
 
 		Result updatedEntity = dao.getById(entity.getId());
-		Assertions.assertEquals( temp, updatedEntity.getId());
+		Assertions.assertEquals( temp, updatedEntity.getMark());
 		Assertions.assertNotEquals(updatedEntity.getUpdated(), updatedEntity.getCreated());
 	}
 
@@ -53,7 +65,10 @@ public class ResultDaoTest extends AbstractDaoTest
 	public void testDelete() 
 	{
 		Result entity = new Result();
-		entity.setUserId(1);
+		entity.setUserId(saveUser().getId());
+        entity.setTestId(saveTest().getId());
+		entity.setMark(5.4);
+		entity.setDate(getCurrentTime());
 		entity.setCreated(getCurrentTime());
 		entity.setUpdated(getCurrentTime());
 		dao.insert(entity);
@@ -67,8 +82,8 @@ public class ResultDaoTest extends AbstractDaoTest
 	public void testGetById() 
 	{
 		Result entity = new Result();
-		entity.setUserId(1);
-        entity.setTestId(1);
+		entity.setUserId(saveUser().getId());
+        entity.setTestId(saveTest().getId());
         entity.setDate(new Timestamp(123));
         entity.setMark(5.4);
 		entity.setCreated(getCurrentTime());
@@ -89,8 +104,8 @@ public class ResultDaoTest extends AbstractDaoTest
 		for (int i = 1; i <= expectedCount; i = i + 1) 
 		{
 			Result entity = new Result();
-			entity.setUserId(1);
-        	entity.setTestId(1);
+			entity.setUserId(saveUser().getId());
+        	entity.setTestId(saveTest().getId());
         	entity.setDate(new Timestamp(123));
         	entity.setMark(5.4);
 			entity.setCreated(getCurrentTime());
@@ -99,5 +114,48 @@ public class ResultDaoTest extends AbstractDaoTest
 		}
 
 		Assertions.assertEquals(expectedCount, dao.getAll().size());
+	}
+
+	private User saveUser() 
+	{
+		User entity = new User();
+		entity.setName("Matesha");
+		entity.setSecondName("Mateshevna");
+		entity.setPatronimyc("TrashMode");
+		entity.setRoleId(saveRole().getId());
+		entity.setCreated(getCurrentTime());
+		entity.setUpdated(getCurrentTime());
+		userDao.insert(entity);
+		return entity;
+	}
+	private Role saveRole() 
+	{
+		Role entity = new Role();
+		entity.setName("Matesha");
+		entity.setCreated(getCurrentTime());
+		entity.setUpdated(getCurrentTime());
+		roleDao.insert(entity);
+		return entity;
+	}
+	private Subject saveSubject() 
+	{
+		Subject entity = new Subject();
+		entity.setName("Matesha");
+		entity.setCreated(getCurrentTime());
+		entity.setUpdated(getCurrentTime());
+		subjectDao.insert(entity);
+		return entity;
+	}
+
+	private Test1 saveTest() 
+	{
+		Test1 entity = new Test1();
+		entity.setName("Matesha");
+		entity.setSubjectId(saveSubject().getId());
+		entity.setStatus(false);
+		entity.setCreated(getCurrentTime());
+		entity.setUpdated(getCurrentTime());
+		testDao.insert(entity);
+		return entity;
 	}
 }

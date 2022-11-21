@@ -45,13 +45,13 @@ public class ResultDaoImpl extends AbstractDao implements IDao<Integer, Result>
     {
         try (Connection c = createConnection()) 
         {
-			PreparedStatement pstmt = c.prepareStatement("update result set user_id=?, test_id created=?, date=?, mark=?, created=?, updated=? where id=?");
+			PreparedStatement pstmt = c.prepareStatement("update result set user_id=?, test_id=?, date=?, mark=?, updated=? where id=?");
 			pstmt.setInt(1, entity.getUserId());
             pstmt.setInt(2, entity.getTestId());
             pstmt.setTimestamp(3, entity.getDate());
             pstmt.setDouble(4, entity.getMark());
-			pstmt.setTimestamp(2, entity.getCreated());
-			pstmt.setTimestamp(3, entity.getUpdated());
+			pstmt.setTimestamp(5, entity.getUpdated());
+            pstmt.setInt(6, entity.getId());
 			pstmt.executeUpdate();
 		} 
         catch (SQLException e) 

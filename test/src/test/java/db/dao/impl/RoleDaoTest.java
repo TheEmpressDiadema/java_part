@@ -37,7 +37,7 @@ public class RoleDaoTest extends AbstractDaoTest
 		dao.update(entity);
 
 		Role updatedEntity = dao.getById(entity.getId());
-		Assertions.assertEquals( temp, updatedEntity.getId());
+		Assertions.assertEquals( temp, updatedEntity.getName());
 		Assertions.assertNotEquals(updatedEntity.getUpdated(), updatedEntity.getCreated());
 	}
 

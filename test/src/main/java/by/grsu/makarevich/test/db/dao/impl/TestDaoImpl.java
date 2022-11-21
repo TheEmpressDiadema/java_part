@@ -29,8 +29,8 @@ public class TestDaoImpl extends AbstractDao implements IDao<Integer, Test1>
 			pstmt.setString(1, entity.getName());
 			pstmt.setInt(2,entity.getSubjectId());
 			pstmt.setBoolean(3, entity.getStatus());
-			pstmt.setTimestamp(2, entity.getCreated());
-			pstmt.setTimestamp(3, entity.getUpdated());
+			pstmt.setTimestamp(4, entity.getCreated());
+			pstmt.setTimestamp(5, entity.getUpdated());
 			pstmt.executeUpdate();
 			entity.setId(getGeneratedId(c, "test"));
 		} catch (SQLException e) 
@@ -44,12 +44,12 @@ public class TestDaoImpl extends AbstractDao implements IDao<Integer, Test1>
     {
         try (Connection c = createConnection()) 
         {
-			PreparedStatement pstmt = c.prepareStatement("update test set name=?, subject_id=?, status=?, created=?, updated=? where id=?");
+			PreparedStatement pstmt = c.prepareStatement("update test set name=?, subject_id=?, status=?, updated=? where id=?");
 			pstmt.setString(1, entity.getName());
 			pstmt.setInt(2, entity.getSubjectId());
 			pstmt.setBoolean(3, entity.getStatus());
-			pstmt.setTimestamp(4, entity.getCreated());
-			pstmt.setTimestamp(5, entity.getUpdated());
+			pstmt.setTimestamp(4, entity.getUpdated());
+			pstmt.setInt(5, entity.getId());
 			pstmt.executeUpdate();
 		} 
         catch (SQLException e) 

@@ -4,12 +4,15 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import by.grsu.makarevich.test.db.dao.IDao;
+import by.grsu.makarevich.test.db.dao.impl.RoleDaoImpl;
 import by.grsu.makarevich.test.db.dao.impl.UserDaoImpl;
 import by.grsu.makarevich.test.db.model.User;
+import by.grsu.makarevich.test.db.model.Role;
 
 public class UserDaoTest extends AbstractDaoTest
 {
     private static final IDao<Integer, User> dao = UserDaoImpl.INSTANCE;
+	private static final IDao<Integer, Role> roleDao = RoleDaoImpl.INSTANCE;
 
     @Test
 	public void testInsert() 
@@ -18,7 +21,7 @@ public class UserDaoTest extends AbstractDaoTest
 		entity.setName("RandomName");
 		entity.setSecondName("RandomSecondName");
 		entity.setPatronimyc("RandomPatronimyc");
-        entity.setRoleId(1);
+        entity.setRoleId(saveSubject().getId());
 		entity.setCreated(getCurrentTime());
 		entity.setUpdated(getCurrentTime());
 		dao.insert(entity);
@@ -32,7 +35,7 @@ public class UserDaoTest extends AbstractDaoTest
 		entity.setName("RandomName");
         entity.setSecondName("RandomSecondName");
 		entity.setPatronimyc("RandomPatronimyc");
-        entity.setRoleId(1);
+        entity.setRoleId(saveSubject().getId());
 		entity.setCreated(getCurrentTime());
 		entity.setUpdated(getCurrentTime());
 		dao.insert(entity);
@@ -43,7 +46,7 @@ public class UserDaoTest extends AbstractDaoTest
 		dao.update(entity);
 
 		User updatedEntity = dao.getById(entity.getId());
-		Assertions.assertEquals( temp, updatedEntity.getId());
+		Assertions.assertEquals( temp, updatedEntity.getName());
 		Assertions.assertNotEquals(updatedEntity.getUpdated(), updatedEntity.getCreated());
 	}
 
@@ -54,7 +57,7 @@ public class UserDaoTest extends AbstractDaoTest
 		entity.setName("RandomName");
         entity.setSecondName("RandomSecondName");
 		entity.setPatronimyc("RandomPatronimyc");
-        entity.setRoleId(1);
+        entity.setRoleId(saveSubject().getId());
 		entity.setCreated(getCurrentTime());
 		entity.setUpdated(getCurrentTime());
 		dao.insert(entity);
@@ -71,7 +74,7 @@ public class UserDaoTest extends AbstractDaoTest
 		entity.setName("RandomName");
         entity.setSecondName("RandomSecondName");
 		entity.setPatronimyc("RandomPatronimyc");
-        entity.setRoleId(1);
+        entity.setRoleId(saveSubject().getId());
 		entity.setCreated(getCurrentTime());
 		entity.setUpdated(getCurrentTime());
 		dao.insert(entity);
@@ -93,12 +96,22 @@ public class UserDaoTest extends AbstractDaoTest
 			entity.setName("RandomName");
             entity.setSecondName("RandomSecondName");
 		    entity.setPatronimyc("RandomPatronimyc");
-            entity.setRoleId(1);
+            entity.setRoleId(saveSubject().getId());
 			entity.setCreated(getCurrentTime());
 			entity.setUpdated(getCurrentTime());
 			dao.insert(entity);
 		}
 
 		Assertions.assertEquals(expectedCount, dao.getAll().size());
+	}
+
+	private Role saveSubject() 
+	{
+		Role entity = new Role();
+		entity.setName("Administrator");
+		entity.setCreated(getCurrentTime());
+		entity.setUpdated(getCurrentTime());
+		roleDao.insert(entity);
+		return entity;
 	}
 }

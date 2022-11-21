@@ -43,13 +43,13 @@ public class UserDaoImpl extends AbstractDao implements IDao<Integer, User>
     {
         try (Connection c = createConnection()) 
         {
-			PreparedStatement pstmt = c.prepareStatement("update user set name=?, second_name=?, patronimyc=?, role_id=?, created=?, updated=? where id=?");
+			PreparedStatement pstmt = c.prepareStatement("update user set name=?, second_name=?, patronimyc=?, role_id=?, updated=? where id=?");
 			pstmt.setString(1, entity.getName());
 			pstmt.setString(2,entity.getSecondName());
 			pstmt.setString(3, entity.getPatronimyc());
 			pstmt.setInt(4, entity.getRoleId());
-			pstmt.setTimestamp(5, entity.getCreated());
-			pstmt.setTimestamp(6, entity.getUpdated());
+			pstmt.setTimestamp(5, entity.getUpdated());
+			pstmt.setInt(6, entity.getId());
 			pstmt.executeUpdate();
 		} 
         catch (SQLException e) 

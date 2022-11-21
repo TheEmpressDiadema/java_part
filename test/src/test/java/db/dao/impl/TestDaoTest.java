@@ -4,12 +4,15 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import by.grsu.makarevich.test.db.dao.IDao;
+import by.grsu.makarevich.test.db.dao.impl.SubjectDaoImpl;
 import by.grsu.makarevich.test.db.dao.impl.TestDaoImpl;
 import by.grsu.makarevich.test.db.model.Test1;
+import by.grsu.makarevich.test.db.model.Subject;
 
 public class TestDaoTest extends AbstractDaoTest
 {
     private static final IDao<Integer, Test1> dao = TestDaoImpl.INSTANCE;
+    private static final IDao<Integer, Subject> subjectDao = SubjectDaoImpl.INSTANCE;
 
     @Test
 	public void testInsert() 
@@ -17,7 +20,7 @@ public class TestDaoTest extends AbstractDaoTest
 		Test1 entity = new Test1();
 		entity.setName("RandomName");
         entity.setStatus(false);
-        entity.setSubjectId(1);
+        entity.setSubjectId(saveSubject().getId());
 		entity.setCreated(getCurrentTime());
 		entity.setUpdated(getCurrentTime());
 		dao.insert(entity);
@@ -30,7 +33,7 @@ public class TestDaoTest extends AbstractDaoTest
 		Test1 entity = new Test1();
         entity.setName("RandomName");
         entity.setStatus(false);
-        entity.setSubjectId(1);
+        entity.setSubjectId(saveSubject().getId());
 		entity.setCreated(getCurrentTime());
 		entity.setUpdated(getCurrentTime());
 		dao.insert(entity);
@@ -41,7 +44,7 @@ public class TestDaoTest extends AbstractDaoTest
 		dao.update(entity);
 
 		Test1 updatedEntity = dao.getById(entity.getId());
-		Assertions.assertEquals( temp, updatedEntity.getId());
+		Assertions.assertEquals( temp, updatedEntity.getName());
 		Assertions.assertNotEquals(updatedEntity.getUpdated(), updatedEntity.getCreated());
 	}
 
@@ -51,7 +54,7 @@ public class TestDaoTest extends AbstractDaoTest
 		Test1 entity = new Test1();
 		entity.setName("RandomName");
         entity.setStatus(false);
-        entity.setSubjectId(1);
+        entity.setSubjectId(saveSubject().getId());
 		entity.setCreated(getCurrentTime());
 		entity.setUpdated(getCurrentTime());
 		dao.insert(entity);
@@ -67,7 +70,7 @@ public class TestDaoTest extends AbstractDaoTest
 		Test1 entity = new Test1();
 		entity.setName("RandomName");
         entity.setStatus(false);
-        entity.setSubjectId(1);
+        entity.setSubjectId(saveSubject().getId());
 		entity.setCreated(getCurrentTime());
 		entity.setUpdated(getCurrentTime());
 		dao.insert(entity);
@@ -88,12 +91,22 @@ public class TestDaoTest extends AbstractDaoTest
 			Test1 entity = new Test1();
 			entity.setName("RandomName");
             entity.setStatus(false);
-            entity.setSubjectId(1);
+            entity.setSubjectId(saveSubject().getId());
 			entity.setCreated(getCurrentTime());
 			entity.setUpdated(getCurrentTime());
 			dao.insert(entity);
 		}
 
 		Assertions.assertEquals(expectedCount, dao.getAll().size());
+	}
+
+	private Subject saveSubject() 
+	{
+		Subject entity = new Subject();
+		entity.setName("Matesha");
+		entity.setCreated(getCurrentTime());
+		entity.setUpdated(getCurrentTime());
+		subjectDao.insert(entity);
+		return entity;
 	}
 }

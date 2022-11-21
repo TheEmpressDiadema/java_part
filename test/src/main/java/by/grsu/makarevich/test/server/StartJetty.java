@@ -1,4 +1,4 @@
-package by.grsu.makarevich.test;
+package by.grsu.makarevich.test.server;
 
 import java.net.MalformedURLException;
 
@@ -15,8 +15,7 @@ import org.eclipse.jetty.webapp.WebAppContext;
  */
 public final class StartJetty {
 
-	private StartJetty() 
-    {
+	private StartJetty() {
 	}
 
 	/**
@@ -46,7 +45,7 @@ public final class StartJetty {
 		bb.setAttribute("org.eclipse.jetty.server.webapp.ContainerIncludeJarPattern", ".*/[^/]*taglibs.*\\.jar$");
 		bb.setServer(server);
 		bb.setContextPath("/");
-		bb.setWar("src/main/webapp");
+		bb.setWar("D:\\Projects\\Java\\pna\\java_part\\test\\src\\main\\webapp");
 		server.setHandler(bb);
 
 		try {

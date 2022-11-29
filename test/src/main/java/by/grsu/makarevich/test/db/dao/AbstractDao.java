@@ -15,7 +15,7 @@ import org.sqlite.SQLiteConfig;
 
 public abstract class AbstractDao 
 {
-    private static final String DB_FOLDER = "db-storage";
+    private static final String DB_FOLDER = "D:/Projects/Java/java_part/test/db-storage";
 	private static String DB_URL;
 	private static String DB_NAME;
 
@@ -57,7 +57,7 @@ public abstract class AbstractDao
 		System.out.println(String.format("create DB %s", DB_NAME));
 
 		try (Connection c = createConnection()) {
-			String sql = new String(Files.readAllBytes(Paths.get("docs/db/db.sql")));
+			String sql = new String(Files.readAllBytes(Paths.get("D:/Projects/Java/java_part/test/docs/db/db.sql")));
 			Statement stmt = c.createStatement();
 			stmt.executeUpdate(sql);
 

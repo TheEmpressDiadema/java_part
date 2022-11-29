@@ -1,0 +1,5 @@
+GET http://localhost:8081/role?id=1
+
+###
+
+POST http://localhost:8081/role?name=RandomName&created=1669763696&updated=1669763696

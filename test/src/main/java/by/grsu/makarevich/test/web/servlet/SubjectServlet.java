@@ -12,13 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import by.grsu.makarevich.test.db.dao.IDao;
-import by.grsu.makarevich.test.db.dao.impl.RoleDaoImpl;
-import by.grsu.makarevich.test.db.model.Role;
-import by.grsu.makarevich.test.web.dto.RoleDto;
+import by.grsu.makarevich.test.db.dao.impl.SubjectDaoImpl;
+import by.grsu.makarevich.test.db.model.Subject;
+import by.grsu.makarevich.test.web.dto.SubjectDto;
 
-public class RoleServlet extends HttpServlet
+public class SubjectServlet extends HttpServlet
 {
-    private static final IDao<Integer, Role> roleDao = RoleDaoImpl.INSTANCE;
+    private static IDao<Integer, Subject> subjectDao = SubjectDaoImpl.INSTANCE;
 
 	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -32,10 +32,10 @@ public class RoleServlet extends HttpServlet
 	}
 
 	private void handleListView(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		List<Role> role = roleDao.getAll(); // get data
+		List<Subject> subject = subjectDao.getAll(); // get data
 
-		List<RoleDto> dtos = role.stream().map((entity) -> {
-			RoleDto dto = new RoleDto();
+		List<SubjectDto> dtos = subject.stream().map((entity) -> {
+			SubjectDto dto = new SubjectDto();
 			// copy necessary fields as-is
 			dto.setId(entity.getId());
 			dto.setName(entity.getName());
@@ -45,45 +45,45 @@ public class RoleServlet extends HttpServlet
 		}).collect(Collectors.toList());
 
 		req.setAttribute("list", dtos); // set data as request attribute (like "add to map") to be used later in JSP
-		req.getRequestDispatcher("role-list.jsp").forward(req, res); // delegate request processing to JSP
+		req.getRequestDispatcher("subject-list.jsp").forward(req, res); // delegate request processing to JSP
 	}
 
 
 	private void handleEditView(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		String roleIdStr = req.getParameter("id");
-		RoleDto dto = new RoleDto();
-		if (!Strings.isNullOrEmpty(roleIdStr)) {
+		String subjectIdStr = req.getParameter("id");
+		SubjectDto dto = new SubjectDto();
+		if (!Strings.isNullOrEmpty(subjectIdStr)) {
 			// object edit
-			Integer roleId = Integer.parseInt(roleIdStr);
-			Role entity = roleDao.getById(roleId);
+			Integer roleId = Integer.parseInt(subjectIdStr);
+			Subject entity = subjectDao.getById(roleId);
 			dto.setId(entity.getId());
 			dto.setName(entity.getName());
 		}
 		req.setAttribute("dto", dto);
-		req.getRequestDispatcher("role-edit.jsp").forward(req, res);
+		req.getRequestDispatcher("subject-edit.jsp").forward(req, res);
 	}
 
 	@Override
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		System.out.println("doPost");
-		Role role = new Role();
-		String roleIdStr = req.getParameter("id");
+		Subject subject = new Subject();
+		String subjectIdStr = req.getParameter("id");
 
-		role.setName(req.getParameter("name"));
-		if (Strings.isNullOrEmpty(roleIdStr)) {
+		subject.setName(req.getParameter("name"));
+		if (Strings.isNullOrEmpty(subjectIdStr)) {
 			// new entity
-			roleDao.insert(role);
+			subjectDao.insert(subject);
 		} else {
 			// updated entity
-			role.setId(Integer.parseInt(roleIdStr));
-			roleDao.update(role);
+			subject.setId(Integer.parseInt(subjectIdStr));
+			subjectDao.update(subject);
 		}
-		res.sendRedirect("/role"); // will send 302 back to client and client will execute GET /car
+		res.sendRedirect("/subject"); // will send 302 back to client and client will execute GET /car
 	}
 
 	@Override
 	public void doDelete(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		System.out.println("doDelete");
-		roleDao.delete(Integer.parseInt(req.getParameter("id")));
+		subjectDao.delete(Integer.parseInt(req.getParameter("id")));
 	}
 }

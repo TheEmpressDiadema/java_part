@@ -1,6 +1,8 @@
 package by.grsu.makarevich.test.web.servlet;
 
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -70,8 +72,10 @@ public class SubjectServlet extends HttpServlet
 		String subjectIdStr = req.getParameter("id");
 
 		subject.setName(req.getParameter("name"));
+		subject.setUpdated(new Timestamp(new Date().getTime()));
 		if (Strings.isNullOrEmpty(subjectIdStr)) {
 			// new entity
+			subject.setCreated(new Timestamp(new Date().getTime()));
 			subjectDao.insert(subject);
 		} else {
 			// updated entity

@@ -76,12 +76,12 @@ public class TestServlet extends HttpServlet
 		System.out.println("doPost");
 		Test1 test = new Test1();
 		String testIdStr = req.getParameter("id");
-		String subjectIdStr = req.getParameter("subjectId");
+		String subjectIdStr = req.getParameter("subject_id");
 		test.setName(req.getParameter("name"));
 		test.setStatus(Boolean.parseBoolean(req.getParameter("status")));
 		test.setSubjectId(subjectIdStr == null ? null : Integer.parseInt(subjectIdStr));
 		test.setUpdated(new Timestamp(new Date().getTime()));
-		if (Strings.isNullOrEmpty(subjectIdStr)) {
+		if (Strings.isNullOrEmpty(testIdStr)) {
 			test.setCreated(new Timestamp(new Date().getTime()));
 			testDao.insert(test);
 		} else {

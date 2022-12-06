@@ -1,6 +1,8 @@
 package by.grsu.makarevich.test.web.servlet;
 
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -70,8 +72,10 @@ public class RoleServlet extends HttpServlet
 		String roleIdStr = req.getParameter("id");
 
 		role.setName(req.getParameter("name"));
+		role.setUpdated(new Timestamp(new Date().getTime()));
 		if (Strings.isNullOrEmpty(roleIdStr)) {
 			// new entity
+			role.setCreated(new Timestamp(new Date().getTime()));
 			roleDao.insert(role);
 		} else {
 			// updated entity

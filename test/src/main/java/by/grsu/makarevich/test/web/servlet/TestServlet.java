@@ -19,6 +19,7 @@ import by.grsu.makarevich.test.db.dao.impl.TestDaoImpl;
 import by.grsu.makarevich.test.db.model.Test1;
 import by.grsu.makarevich.test.web.dto.TestDto;
 import by.grsu.makarevich.test.db.model.Subject;
+import by.grsu.makarevich.test.web.dto.SubjectDto;
 
 
 public class TestServlet extends HttpServlet
@@ -69,7 +70,17 @@ public class TestServlet extends HttpServlet
 			dto.setSubjectId(entity.getSubjectId());
 		}
 		req.setAttribute("dto", dto);
+		req.setAttribute("allSubjects", getAllSubjectsDtos());
 		req.getRequestDispatcher("test-edit.jsp").forward(req, res);
+	}
+
+	private List<SubjectDto> getAllSubjectsDtos() {
+		return subjectDao.getAll().stream().map((entity) -> {
+			SubjectDto dto = new SubjectDto();
+			dto.setId(entity.getId());
+			dto.setName(entity.getName());
+			return dto;
+		}).collect(Collectors.toList());
 	}
 
 	@Override

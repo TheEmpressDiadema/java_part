@@ -19,6 +19,7 @@ import by.grsu.makarevich.test.db.dao.impl.UserDaoImpl;
 import by.grsu.makarevich.test.db.model.User;
 import by.grsu.makarevich.test.web.dto.UserDto;
 import by.grsu.makarevich.test.db.model.Role;
+import by.grsu.makarevich.test.web.dto.RoleDto;
 
 public class UserServlet extends HttpServlet
 {
@@ -70,7 +71,17 @@ public class UserServlet extends HttpServlet
 			dto.setRoleId(entity.getRoleId());
 		}
 		req.setAttribute("dto", dto);
+		req.setAttribute("allRoles", getAllRolesDtos());
 		req.getRequestDispatcher("user-edit.jsp").forward(req, res);
+	}
+
+	private List<RoleDto> getAllRolesDtos() {
+		return roleDao.getAll().stream().map((entity) -> {
+			RoleDto dto = new RoleDto();
+			dto.setId(entity.getId());
+			dto.setName(entity.getName());
+			return dto;
+		}).collect(Collectors.toList());
 	}
 
 	@Override

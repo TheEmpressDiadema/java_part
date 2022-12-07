@@ -18,6 +18,7 @@ import by.grsu.makarevich.test.db.dao.impl.ResultDaoImpl;
 import by.grsu.makarevich.test.db.dao.impl.UserDaoImpl;
 import by.grsu.makarevich.test.db.dao.impl.TestDaoImpl;
 import by.grsu.makarevich.test.db.model.User;
+import by.grsu.makarevich.test.web.dto.TestDto;
 import by.grsu.makarevich.test.web.dto.UserDto;
 import by.grsu.makarevich.test.db.model.Result;
 import by.grsu.makarevich.test.web.dto.ResultDto;
@@ -78,8 +79,18 @@ public class ResultServlet extends HttpServlet
 			dto.setTestId(entity.getTestId());
 		}
 		req.setAttribute("dto", dto);
+		req.setAttribute("allTests", getAllTestsDtos());
 		req.setAttribute("allUsers", getAllUsersDtos());
 		req.getRequestDispatcher("result-edit.jsp").forward(req, res);
+	}
+
+	private List<TestDto> getAllTestsDtos() {
+		return testDao.getAll().stream().map((entity) -> {
+			TestDto dto = new TestDto();
+			dto.setId(entity.getId());
+			dto.setName(entity.getName());
+			return dto;
+		}).collect(Collectors.toList());
 	}
 
 	private List<UserDto> getAllUsersDtos() {
@@ -87,6 +98,8 @@ public class ResultServlet extends HttpServlet
 			UserDto dto = new UserDto();
 			dto.setId(entity.getId());
 			dto.setName(entity.getName());
+			dto.setSecondName(entity.getSecondName());
+			dto.setPatronimyc(entity.getPatronimyc());
 			return dto;
 		}).collect(Collectors.toList());
 	}

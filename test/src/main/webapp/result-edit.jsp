@@ -15,17 +15,29 @@
 		<div class="row">
 			<input type="hidden" name="id" value="${dto.id}" />
 			<div class="input-field col s6">
-					<input type="text" name="userId" value="${dto.userId}"> <label for="userId">ID пользователя</label>
-				</div>
-			<div class="input-field col s6">
-				<input type="text" name="testId" value="${dto.testId}"> <label for="testId">ID теста</label>
-			</div>
-			<div class="input-field col s6">
 				<input type="text" name="date" value="${dto.date}"> <label for="date">Дата</label>
 			</div>
 			<div class="input-field col s6">
 				<input type="text" name="mark" value="${dto.mark}"> <label for="mark">Оценка</label>
 			</div>
+		</div>
+		<div class="col s6">
+			<label for="userId">User ID</label> 
+			<select name="userId" class="browser-default" required>
+				<option value="">--select user--</option>
+				<c:forEach items="${allUsers}" var="user">
+					<option value="${user.id}" <c:if test="${user.id eq dto.userId}">selected="selected"</c:if>>${user.name} ${user.secondName} ${user.patronimyc}</option>
+				</c:forEach>
+			</select>
+		</div>
+		<div class="col s6">
+			<label for="testId">Test ID</label> 
+			<select name="testId" class="browser-default" required>
+				<option value="">--select test--</option>
+				<c:forEach items="${allTests}" var="test">
+					<option value="${test.id}" <c:if test="${test.id eq dto.testId}">selected="selected"</c:if>>${test.name}</option>
+				</c:forEach>
+			</select>
 		</div>
 		<div class="row">
 			<div class="col s12 input-field center-align">

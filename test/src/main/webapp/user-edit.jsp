@@ -28,10 +28,14 @@
 					<input type="text" name="patronimyc" value="${dto.patronimyc}"> <label for="patronimyc">Отчество пользователя</label>
 				</div>
 		</div>
-		<div class="row">
-			<div class="input-field col s6">
-					<input type="text" name="roleId" value="${dto.roleId}"> <label for="roleId">Роль пользователя</label>
-				</div>
+		<div class="col s6">
+			<label for="roleId">Role ID</label> 
+			<select name="roleId" class="browser-default" required>
+				<option value="">--select test--</option>
+				<c:forEach items="${allRoles}" var="role">
+					<option value="${role.id}" <c:if test="${role.id eq dto.roleId}">selected="selected"</c:if>>${role.name}</option>
+				</c:forEach>
+			</select>
 		</div>
 		<div class="row">
 			<div class="col s12 input-field center-align">

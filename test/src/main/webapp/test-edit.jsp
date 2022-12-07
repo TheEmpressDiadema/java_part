@@ -20,12 +20,18 @@
 		</div>
 		<div class="row">
 			<div class="input-field col s6">
-					<input type="text" name="subjectId" value="${dto.subjectId}"> <label for="subjectId">ID предмета</label>
-				</div>
-			<div class="input-field col s6">
 				<label><input type="checkbox" name="status" ${dto.status ? 'checked' : ''} value="true" /> <span>Активен</span>
 				</label>
 			</div>
+		</div>
+		<div class="col s6">
+			<label for="subjectId">Subject ID</label> 
+			<select name="subjectId" class="browser-default" required>
+				<option value="">--select subject--</option>
+				<c:forEach items="${allSubjects}" var="subject">
+					<option value="${subject.id}" <c:if test="${subject.id eq dto.subjectId}">selected="selected"</c:if>>${subject.name}</option>
+				</c:forEach>
+			</select>
 		</div>
 		<div class="row">
 			<div class="col s12 input-field center-align">

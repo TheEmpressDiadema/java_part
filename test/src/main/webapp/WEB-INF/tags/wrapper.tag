@@ -22,6 +22,7 @@
 			<li><a href="/role">Роли</a></li>
 			<li><a href="/subject">Предметы</a></li>
             <li><a href="/user">Пользователи</a></li>
+			<li class="active"><a onclick="sendHTTPDelete('/login')">Logout</a></li>
 			<li><% java.util.Date date = new java.util.Date(); out.print(date.toString()); %></li>
 		</ul>
 	</div>

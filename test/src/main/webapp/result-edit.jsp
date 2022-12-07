@@ -15,10 +15,10 @@
 		<div class="row">
 			<input type="hidden" name="id" value="${dto.id}" />
 			<div class="input-field col s6">
-				<input type="text" name="date" value="${dto.date}"> <label for="date">Дата</label>
+				<input type="text" name="date" required value="${dto.date}"> <label for="date">Дата</label>
 			</div>
 			<div class="input-field col s6">
-				<input type="text" name="mark" value="${dto.mark}"> <label for="mark">Оценка</label>
+				<input type="number" min="0" required max="10" name="mark" value="${dto.mark}"> <label for="mark">Оценка</label>
 			</div>
 		</div>
 		<div class="col s6">

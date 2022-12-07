@@ -15,7 +15,7 @@
 		<div class="row">
 			<input type="hidden" name="id" value="${dto.id}" />
 			<div class="input-field col s6">
-					<input type="text" name="name" value="${dto.name}"> <label for="name">Имя роли</label>
+					<input type="text" name="name" required maxlength="30" value="${dto.name}"> <label for="name">Имя роли</label>
 				</div>
 		</div>
 		<div class="row">

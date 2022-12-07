@@ -15,17 +15,17 @@
 			<input type="hidden" name="id" value="${dto.id}" />
 		<div class="row">
 			<div class="input-field col s6">
-					<input type="text" name="name" value="${dto.name}"> <label for="name">Имя пользователя</label>
+					<input type="text" name="name" required value="${dto.name}"> <label for="name">Имя пользователя</label>
 				</div>
 		</div>
 		<div class="row">
 			<div class="input-field col s6">
-					<input type="text" name="secondName" value="${dto.secondName}"> <label for="secondName">Фамилия пользователя</label>
+					<input type="text" name="secondName" required value="${dto.secondName}"> <label for="secondName">Фамилия пользователя</label>
 				</div>
 		</div>
 		<div class="row">
 			<div class="input-field col s6">
-					<input type="text" name="patronimyc" value="${dto.patronimyc}"> <label for="patronimyc">Отчество пользователя</label>
+					<input type="text" name="patronimyc" required value="${dto.patronimyc}"> <label for="patronimyc">Отчество пользователя</label>
 				</div>
 		</div>
 		<div class="col s6">

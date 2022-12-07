@@ -10,6 +10,16 @@
 
     <!-- Servlets -->
 	<servlet>
+		<servlet-name>LoginServlet</servlet-name>
+		<servlet-class>by.grsu.makarevich.test.web.servlet.LoginServlet</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>InputTypesServlet</servlet-name>
+		<servlet-class>by.grsu.makarevich.test.web.servlet.InputTypesServlet</servlet-class>
+	</servlet>
+
+	<servlet>
 		<servlet-name>SubjectServletPrime</servlet-name>
 		<servlet-class>by.grsu.makarevich.test.web.servlet.SubjectServletPrime</servlet-class>
 	</servlet>
@@ -69,5 +79,36 @@
 		<servlet-name>SubjectServletPrime</servlet-name>
 		<url-pattern>/subjectprime</url-pattern>
 	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>InputTypesServlet</servlet-name>
+		<url-pattern>/input-types</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>LoginServlet</servlet-name>
+		<url-pattern>/login</url-pattern>
+	</servlet-mapping>
+
+	<!-- Filters -->
+	<filter>
+		<filter-name>AuthenticationFilter</filter-name>
+		<filter-class>by.grsu.makarevich.test.web.security.AuthenticationFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>AuthenticationFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<error-page>
+		<error-code>404</error-code>
+		<location>/404.jsp</location>
+	</error-page>
+
+	<error-page>
+		<error-code>500</error-code>
+		<location>/500.jsp</location>
+	</error-page>
 
 </web-app>

@@ -4,7 +4,7 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags"%>
 <c:set var="pageTitle" value="user-list" scope="application"/>
 <t:wrapper>
-		<h1>Список предметов</h1>
+		<h1>Список пользователей</h1>
 		<div class="row">
 			<div class="col s12">
 				<div class="center-align">
@@ -16,11 +16,13 @@
 			<thead>
 				<tr>
 					<th>id</th>
-					<th>name</th>
-					<th>second name</th>
-					<th>patronimyc</th>
-                    <th>role</th>
-					<th>actions</th>
+					<th>Имя</th>
+					<th>Фамилия</th>
+					<th>Отчество</th>
+                    <th>Роль</th>
+					<th>Создан</th>
+					<th>Изменен</th>
+					<th>Действия</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -31,6 +33,8 @@
 					<td><c:out value="${entity.secondName}" /></td>
 					<td><c:out value="${entity.patronimyc}" /></td>
 					<td><c:out value="${entity.roleName}" /></td>
+					<td><fmt:formatDate pattern="yyyy-MM-dd" value="${entity.created}" /></td>
+					<td><fmt:formatDate pattern="yyyy-MM-dd" value="${entity.updated}" /></td>
 					<td><a class="btn-small btn-floating waves-effect waves-light blue" title="редактировать" href="/user?view=edit&id=${entity.id}"><i
 							class="material-icons">edit</i></a><a class="btn-small btn-floating waves-effect waves-light red" title="удалить" onclick="sendHTTPDelete('/user?id=${entity.id}')"><i class="material-icons">delete</i></a></td>
 				</tr>

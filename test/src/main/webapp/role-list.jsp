@@ -4,7 +4,7 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags"%>
 <c:set var="pageTitle" value="role-list" scope="application"/>
 <t:wrapper>
-		<h1>Список предметов</h1>
+		<h1>Список ролей</h1>
 		<div class="row">
 			<div class="col s12">
 				<div class="center-align">
@@ -16,9 +16,9 @@
 			<thead>
 				<tr>
 					<th>id</th>
-					<th>name</th>
-					<th>created</th>
-					<th>updated</th>
+					<th>Имя</th>
+					<th>Создан</th>
+					<th>Изменен</th>
 					<th>actions</th>
 				</tr>
 			</thead>
@@ -27,8 +27,8 @@
 				<tr>
 					<td><c:out value="${entity.id}" /></td>
 					<td><c:out value="${entity.name}" /></td>
-					<td><c:out value="${entity.created}" /></td>
-					<td><c:out value="${entity.updated}" /></td>
+					<td><fmt:formatDate pattern="yyyy-MM-dd" value="${entity.created}" /></td>
+					<td><fmt:formatDate pattern="yyyy-MM-dd" value="${entity.updated}" /></td>
 					<td><a class="btn-small btn-floating waves-effect waves-light blue" title="редактировать" href="/role?view=edit&id=${entity.id}"><i
 							class="material-icons">edit</i></a><a class="btn-small btn-floating waves-effect waves-light red" title="удалить" onclick="sendHTTPDelete('/role?id=${entity.id}')"><i class="material-icons">delete</i></a></td>
 				</tr>

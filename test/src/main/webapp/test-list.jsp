@@ -4,7 +4,7 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags"%>
 <c:set var="pageTitle" value="test-list" scope="application"/>
 <t:wrapper>
-		<h1>Список предметов</h1>
+		<h1>Список тестов</h1>
 		<div class="row">
 			<div class="col s12">
 				<div class="center-align">
@@ -16,10 +16,12 @@
 			<thead>
 				<tr>
 					<th>id</th>
-					<th>name</th>
-					<th>subject</th>
-					<th>status</th>
-					<th>actions</th>
+					<th>Имя</th>
+					<th>Предмет</th>
+					<th>Статус</th>
+					<th>Создан</th>
+					<th>Обновлен</th>
+					<th>Действия</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -29,6 +31,8 @@
 					<td><c:out value="${entity.name}" /></td>
 					<td><c:out value="${entity.subjectName}" /></td>
 					<td><c:out value="${entity.status}" /></td>
+					<td><fmt:formatDate pattern="yyyy-MM-dd" value="${entity.created}" /></td>
+					<td><fmt:formatDate pattern="yyyy-MM-dd" value="${entity.updated}" /></td>
 					<td><a class="btn-small btn-floating waves-effect waves-light blue" title="редактировать" href="/test?view=edit&id=${entity.id}"><i
 							class="material-icons">edit</i></a><a class="btn-small btn-floating waves-effect waves-light red" title="удалить" onclick="sendHTTPDelete('/test?id=${entity.id}')"><i class="material-icons">delete</i></a></td>
 				</tr>

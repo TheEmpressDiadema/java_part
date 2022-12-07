@@ -2,6 +2,7 @@ package by.grsu.makarevich.test.web.servlet;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -95,15 +96,17 @@ public class ResultServlet extends HttpServlet
 		System.out.println("doPost");
 		Result result = new Result();
 		String resultIdStr = req.getParameter("id");
-		String userIdStr = req.getParameter("modelId");
-		String testIdStr = req.getParameter("ownerId");
+		String userIdStr = req.getParameter("userId");
+		String testIdStr = req.getParameter("testId");
 
 		result.setMark(Double.parseDouble(req.getParameter("mark")));
         result.setDate(new Timestamp(Long.parseLong(req.getParameter("date"))));
 		result.setUserId(userIdStr == null ? null : Integer.parseInt(userIdStr));
 		result.setTestId(testIdStr == null ? null : Integer.parseInt(testIdStr));
+		result.setUpdated(new Timestamp(new Date().getTime()));
 		if (Strings.isNullOrEmpty(resultIdStr)) {
 			// new entity
+			result.setCreated(new Timestamp(new Date().getTime()));
 			resultDao.insert(result);
 		} else {
 			// updated entity

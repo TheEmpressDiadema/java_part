@@ -54,7 +54,7 @@ public class UserServlet extends HttpServlet
 		}).collect(Collectors.toList());
 
 		req.setAttribute("list", dtos);
-		req.getRequestDispatcher("users-list.jsp").forward(req, res);
+		req.getRequestDispatcher("user-list.jsp").forward(req, res);
 	}
 
 	private void handleEditView(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {

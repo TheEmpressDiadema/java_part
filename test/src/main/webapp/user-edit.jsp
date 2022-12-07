@@ -1,40 +1,45 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags"%>
-<c:set var="pageTitle" value="user-edit" scope="application"/>
+<c:set var="pageTitle" value="user-edit" scope="application" />
 <t:wrapper>
-		<h1>Изменить профиль пользователя</h1>
-
-
+	<c:choose>
+		<c:when test="${empty dto.id}">
+			<h1>Создать пользователя</h1>
+		</c:when>
+		<c:otherwise>
+			<h1>Изменить пользователя #${dto.id}</h1>
+		</c:otherwise>
+	</c:choose>
+	<form class="col s12" method="post" action="/user">
+			<input type="hidden" name="id" value="${dto.id}" />
 		<div class="row">
-			<form class="col s12">
-				<div class="row">
-					<div class="input-field col s6">
-						<input placeholder="Имя теста" id="first_name" type="text"
-							class="validate">
-					</div>
-					<div class="input-field col s6">
-						<input id="last_name" type="text" class="validate"> <label
-							for="last_name">Тип теста</label>
-					</div>
-				</div>				
-				  <label>Статус</label>
-				  <select class="browser-default">
-					<option value="" disabled selected>Выберите</option>
-					<option value="1">Активен</option>
-					<option value="2">В разработке</option>
-				  </select>
-			</form>
+			<div class="input-field col s6">
+					<input type="text" name="name" value="${dto.name}"> <label for="name">Имя пользователя</label>
+				</div>
 		</div>
-
-	</div>
-</div>
-
-<div class="row">
-	<div class="col s12 input-field center-align">
-		<a class="btn waves-effect waves-light red" href="list.jsp">К списку</a> <a class="btn waves-effect waves-light green"
-			href="#">Сохранить</a>
-	</div>
-</div>
+		<div class="row">
+			<div class="input-field col s6">
+					<input type="text" name="secondName" value="${dto.secondName}"> <label for="secondName">Фамилия пользователя</label>
+				</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s6">
+					<input type="text" name="patronimyc" value="${dto.patronimyc}"> <label for="patronimyc">Отчество пользователя</label>
+				</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s6">
+					<input type="text" name="roleId" value="${dto.roleId}"> <label for="roleId">Роль пользователя</label>
+				</div>
+		</div>
+		<div class="row">
+			<div class="col s12 input-field center-align">
+				<a class="btn waves-effect waves-light red" href="/user"><i class="material-icons left">list</i>back</a>&nbsp;
+				<button class="btn waves-effect waves-light" type="submit">
+					<i class="material-icons left">save</i>save
+				</button>
+			</div>
+		</div>
+	</form>
 </t:wrapper>

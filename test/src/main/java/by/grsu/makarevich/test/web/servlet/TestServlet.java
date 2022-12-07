@@ -48,8 +48,8 @@ public class TestServlet extends HttpServlet
 			dto.setCreated(entity.getCreated());
 			dto.setUpdated(entity.getUpdated());
 
-			Subject subject = subjectDao.getById(entity.getSubjectId());
-			dto.setSubjectName(subject.getName());
+			Subject brand = subjectDao.getById(entity.getSubjectId());
+			dto.setSubjectName(brand.getName());
 			return dto;
 		}).collect(Collectors.toList());
 
@@ -58,14 +58,15 @@ public class TestServlet extends HttpServlet
 	}
 
 	private void handleEditView(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		String testIdStr = req.getParameter("id");
+		String modelIdStr = req.getParameter("id");
 		TestDto dto = new TestDto();
-		if (!Strings.isNullOrEmpty(testIdStr)) {
-			Integer testId = Integer.parseInt(testIdStr);
-			Test1 entity = testDao.getById(testId);
+		if (!Strings.isNullOrEmpty(modelIdStr)) {
+			Integer modelId = Integer.parseInt(modelIdStr);
+			Test1 entity = testDao.getById(modelId);
 			dto.setId(entity.getId());
 			dto.setName(entity.getName());
 			dto.setStatus(entity.getStatus());
+			dto.setSubjectId(entity.getSubjectId());
 		}
 		req.setAttribute("dto", dto);
 		req.getRequestDispatcher("test-edit.jsp").forward(req, res);
@@ -76,7 +77,7 @@ public class TestServlet extends HttpServlet
 		System.out.println("doPost");
 		Test1 test = new Test1();
 		String testIdStr = req.getParameter("id");
-		String subjectIdStr = req.getParameter("subject_id");
+		String subjectIdStr = req.getParameter("subjectId");
 		test.setName(req.getParameter("name"));
 		test.setStatus(Boolean.parseBoolean(req.getParameter("status")));
 		test.setSubjectId(subjectIdStr == null ? null : Integer.parseInt(subjectIdStr));

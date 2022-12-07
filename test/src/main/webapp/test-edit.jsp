@@ -20,10 +20,10 @@
 		</div>
 		<div class="row">
 			<div class="input-field col s6">
-					<input type="text" name="name" value="${dto.subjectId}"> <label for="subjectId">ID предмета</label>
+					<input type="text" name="subjectId" value="${dto.subjectId}"> <label for="subjectId">ID предмета</label>
 				</div>
 			<div class="input-field col s6">
-				<label><input type="checkbox" name="status" ${dto.status ? 'checked' : ''} value="true" /> <span>Статус</span>
+				<label><input type="checkbox" name="status" ${dto.status ? 'checked' : ''} value="true" /> <span>Активен</span>
 				</label>
 			</div>
 		</div>

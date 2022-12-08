@@ -19,7 +19,7 @@
 					<th>Имя</th>
 					<th>Создан</th>
 					<th>Изменен</th>
-					<th>actions</th>
+					<th>Действия</th>
 				</tr>
 			</thead>
 			<tbody>

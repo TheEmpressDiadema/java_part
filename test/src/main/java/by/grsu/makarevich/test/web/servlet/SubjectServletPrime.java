@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import by.grsu.makarevich.test.db.dao.IDao;
 import by.grsu.makarevich.test.db.dao.impl.SubjectDaoImpl;
 import by.grsu.makarevich.test.db.model.Subject;
-import by.grsu.makarevich.test.web.ValidationUtils;
 
 public class SubjectServletPrime extends HttpServlet{
     private static final IDao<Integer, Subject> SubjectDao = SubjectDaoImpl.INSTANCE;

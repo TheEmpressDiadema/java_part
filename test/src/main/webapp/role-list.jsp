@@ -35,6 +35,7 @@
 			</c:forEach>
 			</tbody>
 		</table>
+		<t:paging />
 
 	</div>
 </div>

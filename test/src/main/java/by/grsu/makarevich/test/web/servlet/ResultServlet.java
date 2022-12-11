@@ -77,6 +77,8 @@ public class ResultServlet extends HttpServlet
             dto.setMark(entity.getMark());
 			dto.setUserId(entity.getUserId());
 			dto.setTestId(entity.getTestId());
+			dto.setCreated(entity.getCreated());
+			dto.setUpdated(entity.getUpdated());
 		}
 		req.setAttribute("dto", dto);
 		req.setAttribute("allTests", getAllTestsDtos());
@@ -113,7 +115,7 @@ public class ResultServlet extends HttpServlet
 		String testIdStr = req.getParameter("testId");
 
 		result.setMark(Double.parseDouble(req.getParameter("mark")));
-        result.setDate(Timestamp.valueOf(req.getParameter("date")));
+        result.setDate(Timestamp.valueOf(req.getParameter("date") + ":00.000"));
 		result.setUserId(userIdStr == null ? null : Integer.parseInt(userIdStr));
 		result.setTestId(testIdStr == null ? null : Integer.parseInt(testIdStr));
 		result.setUpdated(new Timestamp(new Date().getTime()));

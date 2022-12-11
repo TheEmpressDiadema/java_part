@@ -15,7 +15,7 @@
 		<div class="row">
 			<input type="hidden" name="id" value="${dto.id}" />
 			<div class="input-field col s6">
-				<input type="text" name="date" required value="${dto.date}"> <label for="date">Дата</label>
+				<input type="text" name="date" required value="${dto.date}"> <label for="date">Дата в формате YYYY-MM-DD hh-mm</label>
 			</div>
 			<div class="input-field col s6">
 				<input type="number" min="0" required max="10" name="mark" value="${dto.mark}"> <label for="mark">Оценка</label>

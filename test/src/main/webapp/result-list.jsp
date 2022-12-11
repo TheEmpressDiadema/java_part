@@ -31,7 +31,7 @@
 					<td><c:out value="${entity.id}" /></td>
 					<td><c:out value="${entity.userName}" /></td>
 					<td><c:out value="${entity.testName}" /></td>
-					<td><c:out value="${entity.date}" /></td>
+					<td><fmt:formatDate pattern="yyyy-MM-dd" value="${entity.date}" /></td>
 					<td><c:out value="${entity.mark}" /></td>
                     <td><fmt:formatDate pattern="yyyy-MM-dd" value="${entity.created}" /></td>
 					<td><fmt:formatDate pattern="yyyy-MM-dd" value="${entity.updated}" /></td>

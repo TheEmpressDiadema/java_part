@@ -27,8 +27,6 @@
 				<tr>
 					<td><c:out value="${entity.id}" /></td>
 					<td><c:out value="${entity.name}" /></td>
-					<td><c:out value="${entity.created}" /></td>
-					<td><c:out value="${entity.updated}" /></td>
 					<td><fmt:formatDate pattern="yyyy-MM-dd" value="${entity.created}" /></td>
 					<td><fmt:formatDate pattern="yyyy-MM-dd" value="${entity.updated}" /></td>
 					<td><a class="btn-small btn-floating waves-effect waves-light blue" title="редактировать" href="/subject?view=edit&id=${entity.id}"><i

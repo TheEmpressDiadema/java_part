@@ -41,6 +41,8 @@ public class SubjectServlet extends HttpServlet
 			// copy necessary fields as-is
 			dto.setId(entity.getId());
 			dto.setName(entity.getName());
+			dto.setCreated(entity.getCreated());
+			dto.setUpdated(entity.getUpdated());
 
 			// build data for complex fields
 			return dto;

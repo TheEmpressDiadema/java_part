@@ -53,6 +53,8 @@ public class ResultServlet extends AbstractListServlet
 			dto.setId(entity.getId());
 			dto.setDate(entity.getDate());
             dto.setMark(entity.getMark());
+			dto.setCreated(entity.getCreated());
+			dto.setUpdated(entity.getUpdated());
 
 			// build data for complex fields
 			User user = userDao.getById(entity.getUserId());

@@ -17,17 +17,14 @@
 		<table>
 			<thead>
 				<tr>
-					<th>ID</th>
+					<th><mytaglib:sort-link pageUrl="${pageUrl}" column="id">ID</mytaglib:sort-link></th>
 					<th>Имя пользователя</th>
 					<th>Имя теста</th>
-                    <th>Дата прохождения теста</th>
-                    <th>Оценка</th>
-                    <th>Создан</th>
-                    <th>Изменен</th>
-					<th>Действия</th>
-					<th><mytaglib:sort-link pageUrl="${pageUrl}" column="id">ID</mytaglib:sort-link></th>
-					<th><mytaglib:sort-link pageUrl="${pageUrl}" column="created">Создан</mytaglib:sort-link></th>
+                    <th><mytaglib:sort-link pageUrl="${pageUrl}" column="date">Дата прохождения теста</mytaglib:sort-link></th>
+					<th><mytaglib:sort-link pageUrl="${pageUrl}" column="mark">Оценка</mytaglib:sort-link></th>
+                    <th><mytaglib:sort-link pageUrl="${pageUrl}" column="created">Создан</mytaglib:sort-link></th>
 					<th><mytaglib:sort-link pageUrl="${pageUrl}" column="updated">Изменен</mytaglib:sort-link></th>
+					<th>Действия</th>
 				</tr>
 			</thead>
 			<tbody>

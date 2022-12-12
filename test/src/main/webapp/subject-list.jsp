@@ -17,10 +17,6 @@
 		<table>
 			<thead>
 				<tr>
-					<th>ID</th>
-					<th>Имя</th>
-					<th>Создан</th>
-					<th>Изменен</th>
 					<th><mytaglib:sort-link pageUrl="${pageUrl}" column="id">ID</mytaglib:sort-link></th>
 					<th><mytaglib:sort-link pageUrl="${pageUrl}" column="name">Имя предмета</mytaglib:sort-link></th>
 					<th><mytaglib:sort-link pageUrl="${pageUrl}" column="created">Создан</mytaglib:sort-link></th>

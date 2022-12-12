@@ -24,13 +24,13 @@
                     <th>Роль</th>
 					<th>Создан</th>
 					<th>Изменен</th>
+					<th>Действия</th>
 					<th><mytaglib:sort-link pageUrl="${pageUrl}" column="id">ID</mytaglib:sort-link></th>
 					<th><mytaglib:sort-link pageUrl="${pageUrl}" column="name">Имя пользователя</mytaglib:sort-link></th>
 					<th><mytaglib:sort-link pageUrl="${pageUrl}" column="secondName">Фамилия</mytaglib:sort-link></th>
 					<th><mytaglib:sort-link pageUrl="${pageUrl}" column="patronimyc">Отчество</mytaglib:sort-link></th>
 					<th><mytaglib:sort-link pageUrl="${pageUrl}" column="created">Создан</mytaglib:sort-link></th>
 					<th><mytaglib:sort-link pageUrl="${pageUrl}" column="updated">Изменен</mytaglib:sort-link></th>
-					<th>Действия</th>
 				</tr>
 			</thead>
 			<tbody>

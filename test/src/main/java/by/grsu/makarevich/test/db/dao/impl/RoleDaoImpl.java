@@ -131,7 +131,7 @@ public class RoleDaoImpl extends AbstractDao implements IDao<Integer, Role>
 	{
 		List<Role> entitiesList = new ArrayList<>();
 		try (Connection c = createConnection()) {
-			StringBuilder sql = new StringBuilder("select * from role");
+			StringBuilder sql = new StringBuilder("select * from role_object");
 
 			final SortDto sortDto = tableStateDto.getSort();
 			if (sortDto != null) {
@@ -157,7 +157,7 @@ public class RoleDaoImpl extends AbstractDao implements IDao<Integer, Role>
 	public int count()
 	{
 		try (Connection c = createConnection()) {
-			PreparedStatement pstmt = c.prepareStatement("select count(*) as c from role");
+			PreparedStatement pstmt = c.prepareStatement("select count(*) as c from role_object");
 			ResultSet rs = pstmt.executeQuery();
 			rs.next();
 			return rs.getInt("c");

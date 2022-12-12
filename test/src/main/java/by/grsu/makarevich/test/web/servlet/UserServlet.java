@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 import com.google.common.base.Strings;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -20,8 +19,9 @@ import by.grsu.makarevich.test.db.model.User;
 import by.grsu.makarevich.test.web.dto.UserDto;
 import by.grsu.makarevich.test.db.model.Role;
 import by.grsu.makarevich.test.web.dto.RoleDto;
+import by.grsu.makarevich.test.web.dto.TableStateDto;
 
-public class UserServlet extends HttpServlet
+public class UserServlet extends AbstractListServlet
 {
     private static final IDao<Integer, User> userDao = UserDaoImpl.INSTANCE;
     private static final IDao<Integer, Role> roleDao = RoleDaoImpl.INSTANCE;
@@ -38,8 +38,11 @@ public class UserServlet extends HttpServlet
 	}
 
 	private void handleListView(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		List<User> users = userDao.getAll(); // get data
+		int totalUsers = userDao.count(); // get count of ALL items
 
+		final TableStateDto tableStateDto = resolveTableStateDto(req, totalUsers);
+		
+		List<User> users = userDao.find(tableStateDto); // get data
 		List<UserDto> dtos = users.stream().map((entity) -> {
 			UserDto dto = new UserDto();
 			dto.setId(entity.getId());

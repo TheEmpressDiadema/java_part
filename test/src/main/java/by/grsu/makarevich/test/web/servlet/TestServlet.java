@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 import com.google.common.base.Strings;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -20,9 +19,10 @@ import by.grsu.makarevich.test.db.model.Test1;
 import by.grsu.makarevich.test.web.dto.TestDto;
 import by.grsu.makarevich.test.db.model.Subject;
 import by.grsu.makarevich.test.web.dto.SubjectDto;
+import by.grsu.makarevich.test.web.dto.TableStateDto;
 
 
-public class TestServlet extends HttpServlet
+public class TestServlet extends AbstractListServlet
 {
     private static final IDao<Integer, Test1> testDao = TestDaoImpl.INSTANCE;
     private static final IDao<Integer, Subject> subjectDao = SubjectDaoImpl.INSTANCE;
@@ -39,8 +39,11 @@ public class TestServlet extends HttpServlet
 	}
 
 	private void handleListView(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		List<Test1> tests = testDao.getAll(); // get data
+		int totalTests = testDao.count(); // get count of ALL items
 
+		final TableStateDto tableStateDto = resolveTableStateDto(req, totalTests);
+		
+		List<Test1> tests = testDao.find(tableStateDto); // get data
 		List<TestDto> dtos = tests.stream().map((entity) -> {
 			TestDto dto = new TestDto();
 			dto.setId(entity.getId());

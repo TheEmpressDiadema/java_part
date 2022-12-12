@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 import com.google.common.base.Strings;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,8 +16,9 @@ import by.grsu.makarevich.test.db.dao.IDao;
 import by.grsu.makarevich.test.db.dao.impl.SubjectDaoImpl;
 import by.grsu.makarevich.test.db.model.Subject;
 import by.grsu.makarevich.test.web.dto.SubjectDto;
+import by.grsu.makarevich.test.web.dto.TableStateDto;
 
-public class SubjectServlet extends HttpServlet
+public class SubjectServlet extends AbstractListServlet
 {
     private static IDao<Integer, Subject> subjectDao = SubjectDaoImpl.INSTANCE;
 
@@ -34,9 +34,12 @@ public class SubjectServlet extends HttpServlet
 	}
 
 	private void handleListView(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		List<Subject> subject = subjectDao.getAll(); // get data
+		int totalSubjects = subjectDao.count(); // get count of ALL items
 
-		List<SubjectDto> dtos = subject.stream().map((entity) -> {
+		final TableStateDto tableStateDto = resolveTableStateDto(req, totalSubjects);
+		
+		List<Subject> subjects = subjectDao.find(tableStateDto); // get data
+		List<SubjectDto> dtos = subjects.stream().map((entity) -> {
 			SubjectDto dto = new SubjectDto();
 			// copy necessary fields as-is
 			dto.setId(entity.getId());

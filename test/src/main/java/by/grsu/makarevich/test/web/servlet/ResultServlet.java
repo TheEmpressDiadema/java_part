@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 import com.google.common.base.Strings;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -23,8 +22,9 @@ import by.grsu.makarevich.test.web.dto.UserDto;
 import by.grsu.makarevich.test.db.model.Result;
 import by.grsu.makarevich.test.web.dto.ResultDto;
 import by.grsu.makarevich.test.db.model.Test1;
+import by.grsu.makarevich.test.web.dto.TableStateDto;
 
-public class ResultServlet extends HttpServlet
+public class ResultServlet extends AbstractListServlet
 {
     private static final IDao<Integer, Result> resultDao = ResultDaoImpl.INSTANCE;
     private static final IDao<Integer, User> userDao = UserDaoImpl.INSTANCE;
@@ -42,8 +42,11 @@ public class ResultServlet extends HttpServlet
 	}
 
 	private void handleListView(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		List<Result> results = resultDao.getAll(); // get data
+		int totalResults = resultDao.count(); // get count of ALL items
 
+		final TableStateDto tableStateDto = resolveTableStateDto(req, totalResults);
+
+		List<Result> results = resultDao.find(tableStateDto);
 		List<ResultDto> dtos = results.stream().map((entity) -> {
 			ResultDto dto = new ResultDto();
 			// copy necessary fields as-is

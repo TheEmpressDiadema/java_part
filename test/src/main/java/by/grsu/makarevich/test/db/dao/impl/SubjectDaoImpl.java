@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import by.grsu.makarevich.test.db.dao.AbstractDao;
 import by.grsu.makarevich.test.db.model.Subject;
 import by.grsu.makarevich.test.db.dao.IDao;
+import by.grsu.makarevich.test.web.dto.TableStateDto;
+import by.grsu.makarevich.test.web.dto.SortDto;
 
 public class SubjectDaoImpl extends AbstractDao implements IDao<Integer, Subject>
 {
@@ -124,5 +126,45 @@ public class SubjectDaoImpl extends AbstractDao implements IDao<Integer, Subject
 		entity.setCreated(res.getTimestamp("created"));
 		entity.setUpdated(res.getTimestamp("updated"));
 		return entity;
+	}
+
+	@Override
+	public List<Subject> find(TableStateDto tableStateDto)
+	{
+		List<Subject> entitiesList = new ArrayList<>();
+		try (Connection c = createConnection()) {
+			StringBuilder sql = new StringBuilder("select * from subject");
+
+			final SortDto sortDto = tableStateDto.getSort();
+			if (sortDto != null) {
+				sql.append(String.format(" order by %s %s", sortDto.getColumn(), resolveSortOrder(sortDto)));
+			}
+
+			sql.append(" limit " + tableStateDto.getItemsPerPage());
+			sql.append(" offset " + resolveOffset(tableStateDto));
+
+			System.out.println("searching Subjects using SQL: " + sql);
+			ResultSet rs = c.createStatement().executeQuery(sql.toString());
+			while (rs.next()) {
+				Subject entity = rowToEntity(rs);
+				entitiesList.add(entity);
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException("can't select Subject entities", e);
+		}
+		return entitiesList;
+	}
+
+	@Override
+	public int count()
+	{
+		try (Connection c = createConnection()) {
+			PreparedStatement pstmt = c.prepareStatement("select count(*) as c from subject");
+			ResultSet rs = pstmt.executeQuery();
+			rs.next();
+			return rs.getInt("c");
+		} catch (SQLException e) {
+			throw new RuntimeException("can't get subject count", e);
+		}
 	}
 }

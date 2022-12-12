@@ -5,7 +5,6 @@ import java.io.PrintWriter;
 import java.sql.Timestamp;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -13,7 +12,7 @@ import by.grsu.makarevich.test.db.dao.IDao;
 import by.grsu.makarevich.test.db.dao.impl.SubjectDaoImpl;
 import by.grsu.makarevich.test.db.model.Subject;
 
-public class SubjectServletPrime extends HttpServlet{
+public class SubjectServletPrime extends AbstractListServlet{
     private static final IDao<Integer, Subject> SubjectDao = SubjectDaoImpl.INSTANCE;
 
     @Override

@@ -2,6 +2,8 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="mytaglib" uri="my-custom-tags-uri"%>
+<c:set var="pageUrl" value="/test" scope="page" />
 <c:set var="pageTitle" value="test-list" scope="application"/>
 <t:wrapper>
 		<h1>Список тестов</h1>
@@ -21,6 +23,10 @@
 					<th>Статус</th>
 					<th>Создан</th>
 					<th>Обновлен</th>
+					<th><mytaglib:sort-link pageUrl="${pageUrl}" column="id">ID</mytaglib:sort-link></th>
+					<th><mytaglib:sort-link pageUrl="${pageUrl}" column="name">Имя теста</mytaglib:sort-link></th>
+					<th><mytaglib:sort-link pageUrl="${pageUrl}" column="created">Создан</mytaglib:sort-link></th>
+					<th><mytaglib:sort-link pageUrl="${pageUrl}" column="updated">Изменен</mytaglib:sort-link></th>
 					<th>Действия</th>
 				</tr>
 			</thead>
@@ -39,7 +45,5 @@
 			</c:forEach>
 			</tbody>
 		</table>
-
-	</div>
-</div>
+<t:paging />
 </t:wrapper>

@@ -2,6 +2,8 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="mytaglib" uri="my-custom-tags-uri"%>
+<c:set var="pageUrl" value="/user" scope="page" />
 <c:set var="pageTitle" value="user-list" scope="application"/>
 <t:wrapper>
 		<h1>Список пользователей</h1>
@@ -22,6 +24,12 @@
                     <th>Роль</th>
 					<th>Создан</th>
 					<th>Изменен</th>
+					<th><mytaglib:sort-link pageUrl="${pageUrl}" column="id">ID</mytaglib:sort-link></th>
+					<th><mytaglib:sort-link pageUrl="${pageUrl}" column="name">Имя пользователя</mytaglib:sort-link></th>
+					<th><mytaglib:sort-link pageUrl="${pageUrl}" column="secondName">Фамилия</mytaglib:sort-link></th>
+					<th><mytaglib:sort-link pageUrl="${pageUrl}" column="patronimyc">Отчество</mytaglib:sort-link></th>
+					<th><mytaglib:sort-link pageUrl="${pageUrl}" column="created">Создан</mytaglib:sort-link></th>
+					<th><mytaglib:sort-link pageUrl="${pageUrl}" column="updated">Изменен</mytaglib:sort-link></th>
 					<th>Действия</th>
 				</tr>
 			</thead>
@@ -41,7 +49,5 @@
 			</c:forEach>
 			</tbody>
 		</table>
-
-	</div>
-</div>
+<t:paging />
 </t:wrapper>
